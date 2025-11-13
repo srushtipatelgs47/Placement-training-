@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+void displayMenu() {
+    printf("TV Remote Control Menu\n");
+    printf("1. Turn On TV\n");
+    printf("2. Turn Off TV\n");
+    printf("3. Change Channel\n");
+    printf("4. Increase Volume\n");
+    printf("5. Decrease Volume\n");
+    printf("6. Mute\n");
+    printf("7. Exit\n");
+}
+
+int main() {
+    int tvStatus = 0; 
+    int channel = 1;
+    int volume = 5;
+    int choice;
+
+    while (1) {
+        displayMenu();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                if (tvStatus == 0) {
+                    tvStatus = 1;
+                    printf("TV is turned on.\n");
+                } else {
+                    printf("TV is already on.\n");
+                }
+                break;
+            case 2:
+                if (tvStatus == 1) {
+                    tvStatus = 0;
+                    printf("TV is turned off.\n");
+                } else {
+                    printf("TV is already off.\n");
+                }
+                break;
+            case 3:
+                if (tvStatus == 1) {
+                    printf("Enter channel number: ");
+                    scanf("%d", &channel);
+                    printf("Channel changed to %d.\n", channel);
+                } else {
+                    printf("TV is off. Please turn it on.\n");
+                }
+                break;
+            case 4:
+                if (tvStatus == 1) {
+                    if (volume < 10) {
+                        volume++;
+                        printf("Volume increased to %d.\n", volume);
+                    } else {
+                        printf("Maximum volume reached.\n");
+                    }
+                } else {
+                    printf("TV is off. Please turn it on.\n");
+                }
+                break;
+            case 5:
+                if (tvStatus == 1) {
+                    if (volume > 0) {
+                        volume--;
+                        printf("Volume decreased to %d.\n", volume);
+                    } else {
+                        printf("Minimum volume reached.\n");
+                    }
+                } else {
+                    printf("TV is off. Please turn it on.\n");
+                }
+                break;
+            case 6:
+                if (tvStatus == 1) {
+                    volume = 0;
+                    printf("TV is muted.\n");
+                } else {
+                    printf("TV is off. Please turn it on.\n");
+                }
+                break;
+            case 7:
+                printf("Exiting TV remote control.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
